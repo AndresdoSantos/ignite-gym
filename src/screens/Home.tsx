@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { FlatList, Heading, HStack, Text, VStack } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
+
+import { TAppNavigatorRoutesProps } from '@routes/app.routes'
 
 import { HomeHeader } from '@components/HomeHeader'
 import { Group } from '@components/Group'
@@ -7,8 +10,14 @@ import { ExerciseCard } from '@components/ExrciseCard'
 
 export const Home = () => {
   const [groupSelected, setGroupSelected] = useState('')
-  const [groups, setGroups] = useState(['costa', 'ombro', 'bíceps', 'tríceps'])
-  const [exercises, setExercises] = useState(['1', '2', '3', '4'])
+  const [groups] = useState(['costa', 'ombro', 'bíceps', 'tríceps'])
+  const [exercises] = useState(['1', '2', '3', '4'])
+
+  const { navigate } = useNavigation<TAppNavigatorRoutesProps>()
+
+  function handleOpenExercisesDetails() {
+    navigate('exercise')
+  }
 
   return (
     <VStack flex={1}>
@@ -43,7 +52,9 @@ export const Home = () => {
         <FlatList
           data={exercises}
           keyExtractor={(item) => item}
-          renderItem={({ item }) => <ExerciseCard />}
+          renderItem={({ item }) => (
+            <ExerciseCard onPress={handleOpenExercisesDetails} />
+          )}
           showsVerticalScrollIndicator={false}
           _contentContainerStyle={{ pb: 20 }}
         />
