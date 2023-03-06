@@ -23,7 +23,7 @@ export const HomeHeader = () => {
         <Text color="gray.100" fontSize="md">
           Hy
         </Text>
-        <Heading color="gray.100" fontSize="md">
+        <Heading color="gray.100" fontSize="md" fontFamily="heading">
           Andres
         </Heading>
       </VStack>
